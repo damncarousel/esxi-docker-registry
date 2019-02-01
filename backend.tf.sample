@@ -1,0 +1,12 @@
+terraform {
+  backend "s3" {
+    bucket = ""
+    key    = "terraform.tfstate"
+    region = ""
+
+    acl = "private"
+
+    access_key = ""
+    secret_key = ""
+  }
+}

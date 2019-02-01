@@ -1,0 +1,17 @@
+.provider.tfvars
+.variables.tfvars
+plan
+id_rsa*
+*.crt
+*.key
+*.pem
+terraform.*
+.terraform/
+*/provider.tf
+*/plan
+*/.variables.tfvars
+*/htpasswd/htpasswd
+
+# FIXME ignore backend.tf till we implement secretization since that does not
+# support interpolation as normal tfs do
+backend.tf
