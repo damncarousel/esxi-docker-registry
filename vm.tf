@@ -5,12 +5,12 @@ resource "vsphere_virtual_machine" "default" {
   datastore_id     = "${data.vsphere_datastore.default.id}"
   num_cpus         = "${var.num_cpus}"
   memory           = "${var.memory}"
-  guest_id         = "${data.vsphere_virtual_machine.coreos.guest_id}"
-  scsi_type        = "${data.vsphere_virtual_machine.coreos.scsi_type}"
+  guest_id         = "${data.vsphere_virtual_machine.template.guest_id}"
+  scsi_type        = "${data.vsphere_virtual_machine.template.scsi_type}"
 
   network_interface {
     network_id   = "${data.vsphere_network.default.id}"
-    adapter_type = "${data.vsphere_virtual_machine.coreos.network_interface_types[0]}"
+    adapter_type = "${data.vsphere_virtual_machine.template.network_interface_types[0]}"
   }
 
   disk {
@@ -19,12 +19,12 @@ resource "vsphere_virtual_machine" "default" {
     # name             = "${var.virtual_machine_name}.vmdk"
     label            = "disk0"
     size             = "${var.disk_size}"
-    eagerly_scrub    = "${data.vsphere_virtual_machine.coreos.disks.0.eagerly_scrub}"
-    thin_provisioned = "${data.vsphere_virtual_machine.coreos.disks.0.thin_provisioned}"
+    eagerly_scrub    = "${data.vsphere_virtual_machine.template.disks.0.eagerly_scrub}"
+    thin_provisioned = "${data.vsphere_virtual_machine.template.disks.0.thin_provisioned}"
   }
 
   clone {
-    template_uuid = "${data.vsphere_virtual_machine.coreos.id}"
+    template_uuid = "${data.vsphere_virtual_machine.template.id}"
   }
 
   extra_config = {
